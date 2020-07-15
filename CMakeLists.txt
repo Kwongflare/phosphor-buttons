@@ -36,6 +36,9 @@ set(HANDLER_SRC_FILES
     src/button_handler.cpp
 )
 
+set(RYAN_SRC_FILES src/invoke.cpp
+)
+
 option (LOOKUP_GPIO_BASE
     "Look up the GPIO base value in /sys/class/gpio. Otherwise use a base of 0." ON
 )
@@ -68,6 +71,9 @@ target_link_libraries(${PROJECT_NAME} "${SDBUSPLUSPLUS_LIBRARIES} -lphosphor_dbu
 add_executable(button-handler ${HANDLER_SRC_FILES})
 target_link_libraries(button-handler "${SDBUSPLUSPLUS_LIBRARIES} -lphosphor_dbus")
 
+add_executable(invoker ${RYAN_SRC_FILES})
+target_link_libraries(invoker "${SDBUSPLUSPLUS_LIBRARIES} -lphosphor_dbus")
+
 set (
     SERVICE_FILES
     ${PROJECT_SOURCE_DIR}/service_files/xyz.openbmc_project.Chassis.Buttons.service
@@ -77,3 +83,5 @@ set (
 install (FILES ${SERVICE_FILES} DESTINATION /lib/systemd/system/)
 install (TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
 install (TARGETS button-handler DESTINATION ${CMAKE_INSTALL_BINDIR})
+install (TARGETS invoker DESTINATION ${CMAKE_INSTALL_BINDIR})
+
