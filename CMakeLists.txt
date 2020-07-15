@@ -78,6 +78,7 @@ set (
     SERVICE_FILES
     ${PROJECT_SOURCE_DIR}/service_files/xyz.openbmc_project.Chassis.Buttons.service
     ${PROJECT_SOURCE_DIR}/service_files/phosphor-button-handler.service
+    ${PROJECT_SOURCE_DIR}/service_files/invoker.service
 )
 
 install (FILES ${SERVICE_FILES} DESTINATION /lib/systemd/system/)
